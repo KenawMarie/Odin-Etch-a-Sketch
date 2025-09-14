@@ -1,4 +1,5 @@
 const body=document.querySelector('body')
+
 const divs=document.querySelector('.container');
 
 for (let i=0;i<(16)**2;i++){
@@ -9,8 +10,8 @@ for (let i=0;i<(16)**2;i++){
     div.addEventListener('mouseleave',background)
 }
 
-divs.style.width='480px'
-divs.style.height='480px'
+divs.style.width='400px'
+divs.style.height='400px'
 
 function number(num){
     return Math.floor(Math.random()*num)
@@ -18,11 +19,24 @@ function number(num){
 function background(e){
     e.target.style.backgroundColor=`rgb(${number(256+1)},${number(256+1)},${number(256+1)})`
 }
+const btns=document.createElement('div')
+btns.className='btns'
+
 const btn=document.createElement('button')
 btn.textContent='Number of Square'
 btn.className='btn'
-body.insertBefore(btn,divs)
+
+const clearBtn=document.createElement('button')
+clearBtn.textContent='clear'
+clearBtn.className='btn'
+clearBtn.setAttribute('type','reset')
+
+btns.appendChild(btn)
+btns.appendChild(clearBtn)
+body.insertBefore(btns,divs)
+
 btn.addEventListener('click',popup)
+clearBtn.addEventListener('click',clear)
 
 function popup(){
     divs.textContent=''
@@ -34,11 +48,16 @@ function popup(){
       for (let i=0;i<(square)**2;i++){
           let div=document.createElement('div');
           div.className='divs';
-          div.style.width=`${480/square}px`
-          div.style.height=`${480/square}px`
+          div.style.width=`${400/square}px`
+          div.style.height=`${400/square}px`
           divs.appendChild(div)
           div.addEventListener('mouseenter',background)
           div.addEventListener('mouseleave',background)
-      }
-  }
+        }
+    }
+}
+
+function clear(){
+    let cleared=divs.querySelectorAll('div');
+    cleared.forEach((div)=>div.style.backgroundColor='#fff')
 }
