@@ -27,16 +27,21 @@ btn.textContent='Number of Square'
 btn.className='btn'
 
 const clearBtn=document.createElement('button')
-clearBtn.textContent='clear'
+clearBtn.textContent='Clear'
 clearBtn.className='btn'
-clearBtn.setAttribute('type','reset')
+
+const eraser=document.createElement('button')
+eraser.textContent='Eraser'
+eraser.className='btn'
 
 btns.appendChild(btn)
+btns.appendChild(eraser)
 btns.appendChild(clearBtn)
 body.insertBefore(btns,divs)
 
 btn.addEventListener('click',popup)
 clearBtn.addEventListener('click',clear)
+eraser.addEventListener('click',erase)
 
 function popup(){
     divs.textContent=''
@@ -60,4 +65,16 @@ function popup(){
 function clear(){
     let cleared=divs.querySelectorAll('div');
     cleared.forEach((div)=>div.style.backgroundColor='#fff')
+}
+
+function erase(){
+    const eraseDiv=divs.querySelectorAll('div')
+    for(const div of eraseDiv){
+        div.addEventListener('mouseenter',backgrounds)
+        div.addEventListener('mouseleave',backgrounds)
+    }
+    
+}
+function backgrounds(){
+    this.style.backgroundColor='#fff';
 }
